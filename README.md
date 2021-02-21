@@ -7,8 +7,16 @@ Version: 02.02.2021
 
 ## TODOs
 
-- [x] Algorithmus Programmiersprache festlegen (Python)
-- [ ] Posekany wegen Datacamp Zugang anschreiben
+- [ ] Algorithmus umgesetzt
+  - [ ] Informationen umgesetzt
+    - [ ] Use Case I1
+    - [ ] Use Case I2
+  - [ ] Statistiken umgesetzt
+    - [ ] Use Case S1
+    - [ ] Use Case S2
+  - [ ] Prognosen umgesetzt
+    - [ ] Use Case P1
+    - [ ] Use Case P2
 
 
 
