@@ -2,15 +2,18 @@
   "container": {
     "china" : {
       "container_id" : 1,
-      "open_date" : "2021-01-20"
+      "curr_weight_kg" : 22,
+      "max_weight_kg" : 25
     },
     "russia" : {
       "container_id" : 2,
-      "open_date" : "2021-01-24"
+      "curr_weight_kg" : 8,
+      "max_weight_kg" : 25
     },
     "usa" : {
       "container_id" : 3,
-      "open_date" : "2021-01-19"
+      "curr_weight_kg" : 15,
+      "max_weight_kg" : 25
     }
   }
 }
