@@ -1,0 +1,32 @@
+{
+  "container": {
+    "status": "CLOSE",
+    "start_time": "01-01-2021",
+    "end_time": "01-02-2021",
+    "type": "",
+    "country": {
+      "china": {
+        "color": {
+          "red": 2,
+          "blue": 5,
+          "green": 10
+        },
+        "brand": {
+          "nike": 7,
+          "adidas": 3,
+          "hm": 7
+        },
+        "category": {
+          "t-shirt": 6,
+          "shoes": 9,
+          "pants": 2
+        },
+        "weight": {
+          "2kg": 4,
+          "3kg": 7,
+          "4kg": 6
+        }
+      }
+    }
+  }
+}

@@ -5,20 +5,19 @@ import json
 class informations:
     """
     Simple information management and analysis
-    UseCase I1 and I2
 
     :Author: Lisa Wachter
     :Version: 2021-02-21
     """
 
-    def container_overdue(self, country=''):
+    def i1_container_overdue(self, country=''):
         """
         Use Case I1
         How many conatiners are still open?
         Which containers are still open and therefore overdue?
         Maximal opening period is 1 month.
         :param country: optional parameter if country is given
-        :return: json with information
+        :return: JSON with information
         """
         # data request for country, container_id, create_date with status = OPEN
         # TODO REST GET Request as JSON
@@ -39,13 +38,13 @@ class informations:
         # get current date
         curr_date = datetime.date.today()
 
-        response_json = '{"container: {'
+        response_json = '{"container": {'
         containers = request_json['container']
         i = 0
         for c in containers:
             i += 1
 
-            response_json += '{}: '.format(c)
+            response_json += '"{}": '.format(c)
             response_json += '{'
 
             # convert container_open_date to date-object
@@ -62,7 +61,7 @@ class informations:
 
             # build json infos
             response_json += '"container_id": {}, '.format(containers[c]['container_id'])
-            response_json += '"open_date": {}, '.format(containers[c]['open_date'])
+            response_json += '"open_date": "{}", '.format(containers[c]['open_date'])
             response_json += '"overdue": {}'.format(overdue)
             if i < len(request_json['container']):
                 response_json += '}, '
@@ -75,7 +74,7 @@ class informations:
         # return json
         return response_json
 
-    def conatiner_utilization(self, country=''):
+    def i2_conatiner_utilization(self, country=''):
         """
         Use Case I2
         container weight utilization
@@ -98,13 +97,13 @@ class informations:
         # convert request to json
         request_json = json.loads(request)
 
-        response_json = '{"container: {'
+        response_json = '{"container": {'
         containers = request_json['container']
         i = 0
         for c in containers:
             i += 1
 
-            response_json += '{}: '.format(c)
+            response_json += '"{}": '.format(c)
             response_json += '{'
 
             # get maximal weight
@@ -135,7 +134,7 @@ class informations:
 
 if __name__ == "__main__":
     info = informations()
-    info.container_overdue()
-    info.container_overdue('china')
-    info.conatiner_utilization()
-    info.conatiner_utilization('china')
+    info.i1_container_overdue()
+    info.i1_container_overdue('china')
+    info.i2_conatiner_utilization()
+    info.i2_conatiner_utilization('china')

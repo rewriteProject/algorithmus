@@ -1,0 +1,17 @@
+{
+  "container": {
+    "status": "CLOSE",
+    "start_time": "01-01-2021",
+    "end_time": "01-02-2021",
+    "attribute": "category",
+    "country": {
+      "china": {
+        "category": {
+          "t-shirt": 6,
+          "shoes": 9,
+          "pants": 2
+        }
+      }
+    }
+  }
+}
