@@ -37,26 +37,15 @@ class predictions:
         # create_date and close_date of closed containers (status=CLOSED)
         # from a specific country (e.g. China) from a specific timespan (e.g. last 2 years)
         # TODO REST GET Request as JSON
-        request = '{"containers": {' \
-                  '"status": "CLOSE", "country": "china", "min_date": "2019-01-01", "max_date": "now",' \
-                  '"dates": {' \
-                  '"1": {"open_date": "2019-01-01", "close_date": "2019-01-30"},' \
-                  '"2": {"open_date": "2019-02-04", "close_date": "2019-03-02"},' \
-                  '"3": {"open_date": "2019-05-10", "close_date": "2019-05-29"},' \
-                  '"4": {"open_date": "2019-09-02", "close_date": "2019-10-01"},' \
-                  '"5": {"open_date": "2019-12-18", "close_date": "2020-01-10"},' \
-                  '"6": {"open_date": "2020-02-02", "close_date": "2020-02-28"},' \
-                  '"7": {"open_date": "2020-04-05", "close_date": "2020-05-01"},' \
-                  '"8": {"open_date": "2020-08-09", "close_date": "2020-09-08"},' \
-                  '"9": {"open_date": "2020-11-01", "close_date": "2020-11-28"},' \
-                  '"10": {"open_date": "2020-12-02", "close_date": "2020-12-29"}' \
-                  '}}}'
+        with open('../resources/p1_db_anfrage_1.json', 'r') as f:
+            request = f.read()
+
         # convert request to json
         request_json = json.loads(request)
 
         # calculate opening time
         average_times = []
-        dates = request_json["containers"]["dates"]
+        dates = request_json["container"]["dates"]
         for d in dates:
             open_date = datetime.strptime(dates[d]["open_date"], '%Y-%m-%d').date()
             close_date = datetime.strptime(dates[d]["close_date"], '%Y-%m-%d').date()
@@ -73,9 +62,8 @@ class predictions:
         # date request from DB
         # create_date of current container (status=OPEN) from certain country
         # TODO REST GET Requst as JSON
-        request_2 = '{"container": {' \
-                    '"status": "OPEN", "country": "china", "create_date": "2021-02-20" ' \
-                    '}}'
+        with open('../resources/p1_db_anfrage_2.json', 'r') as f:
+            request_2 = f.read()
         # convert request to json
         request_json_2 = json.loads(request_2)
         open_date_2 = request_json_2["container"]["create_date"]
@@ -100,7 +88,7 @@ class predictions:
         response_json += '"create_date": "{}", '.format(open_date_2)
         response_json += '"close_date_forecast": "{}", '.format(close_date_forecast)
         response_json += '"accuracy": "{}"'.format(accuracy)
-        response_json += '}'
+        response_json += '}}'
         print(response_json)
         return response_json
 
@@ -325,7 +313,7 @@ class predictions:
 
 if __name__ == "__main__":
     pred = predictions()
-    #pred.p1_estimated_delivery('china')
-    pred.p2_sales_prediction('china', '2020-01-01', 'm')
+    pred.p1_estimated_delivery('china')
+    #pred.p2_sales_prediction('china', '2020-01-01', 'm')
 
 
