@@ -9,7 +9,7 @@ Version: 02.02.2021
 
 ### Informationen
 
-#### I1 Container überfällig
+#### I1 Container Überfälligkeit
 
 **von Flo:**
 
@@ -18,6 +18,7 @@ Version: 02.02.2021
 
 **an Chris:**
 
++ I1
 + Land (wenn kein Land angegeben ist sind es alle Länder)
 + (Status: OPEN)
 
@@ -28,7 +29,7 @@ Version: 02.02.2021
 * Öffnungs-Datum
 * Status: OPEN
 
-```
+```json
 {
   "container": {
     "status": "OPEN",
@@ -52,7 +53,7 @@ Version: 02.02.2021
 
 **an Flo:**
 
-```
+```json
 {
 	"container": {
 		"china": {
@@ -76,11 +77,78 @@ Version: 02.02.2021
 
 
 
-#### I2
+#### I2 Container Gewicht Auslastung
 
 **von Flo:**
 
-+ 
++ I2
++ Land (wenn kein Land angegeben ist sind es alle Länder)
+
+**an Chris:**
+
++ I2
++ Land (wenn kein Land angegeben ist sind es alle Länder)
++ (Status: OPEN)
+
+**von Chris:**
+
++ Land/Länder
++ ContainerID
++ Aktuelles Gewicht
++ Maximales Gewicht
+
+```json
+{
+  "container": {
+    "status": "OPEN",
+    "country": {
+      "china": {
+        "container_id": 1,
+        "curr_weight_kg": 22,
+        "max_weight_kg": 25
+      },
+      "russia": {
+        "container_id": 2,
+        "curr_weight_kg": 8,
+        "max_weight_kg": 25
+      },
+      "usa": {
+        "container_id": 3,
+        "curr_weight_kg": 15,
+        "max_weight_kg": 25
+      }
+    }
+  }
+}
+
+```
+
+**an Flo:**
+
+```json
+{
+	"container": {
+		"china": {
+			"container_id": 1, 
+			"curr_weight_kg": 22, 
+			"max_weight_kg": 25, 
+			"utilization": 88.0
+		}, 
+		"russia": {
+			"container_id": 2, 
+			"curr_weight_kg": 8, 
+			"max_weight_kg": 25, 
+			"utilization": 32.0
+		},
+		"usa": {
+			"container_id": 3, 
+			"curr_weight_kg": 15, 
+			"max_weight_kg": 25, 
+			"utilization": 60.0
+		}
+	}
+}
+```
 
 
 

@@ -84,25 +84,25 @@ class informations:
         response_json = '{"container": {'
         containers = request_json['container']
         i = 0
-        for c in containers:
+        for c in containers['country']:
             i += 1
 
             response_json += '"{}": '.format(c)
             response_json += '{'
 
             # get maximal weight
-            max_weight = containers[c]['max_weight_kg']
+            max_weight = containers['country'][c]['max_weight_kg']
 
             # get current weight
-            curr_weight = containers[c]['curr_weight_kg']
+            curr_weight = containers['country'][c]['curr_weight_kg']
 
             # calculate utilization
             utilization = (curr_weight/max_weight)*100
 
             # build json infos
-            response_json += '"container_id": {}, '.format(containers[c]['container_id'])
-            response_json += '"curr_weight_kg": {}, '.format(containers[c]['curr_weight_kg'])
-            response_json += '"max_weight_kg": {}, '.format(containers[c]['max_weight_kg'])
+            response_json += '"container_id": {}, '.format(containers['country'][c]['container_id'])
+            response_json += '"curr_weight_kg": {}, '.format(containers['country'][c]['curr_weight_kg'])
+            response_json += '"max_weight_kg": {}, '.format(containers['country'][c]['max_weight_kg'])
             response_json += '"utilization": {}'.format(utilization)
             if i < len(request_json['container']):
                 response_json += '}, '

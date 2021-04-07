@@ -1,19 +1,22 @@
 {
   "container": {
-    "china" : {
-      "container_id" : 1,
-      "curr_weight_kg" : 22,
-      "max_weight_kg" : 25
-    },
-    "russia" : {
-      "container_id" : 2,
-      "curr_weight_kg" : 8,
-      "max_weight_kg" : 25
-    },
-    "usa" : {
-      "container_id" : 3,
-      "curr_weight_kg" : 15,
-      "max_weight_kg" : 25
+    "status": "OPEN",
+    "country": {
+      "china": {
+        "container_id": 1,
+        "curr_weight_kg": 22,
+        "max_weight_kg": 25
+      },
+      "russia": {
+        "container_id": 2,
+        "curr_weight_kg": 8,
+        "max_weight_kg": 25
+      },
+      "usa": {
+        "container_id": 3,
+        "curr_weight_kg": 15,
+        "max_weight_kg": 25
+      }
     }
   }
 }
