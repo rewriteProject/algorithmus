@@ -1,11 +1,22 @@
+from flask import Flask, request
+
+app = Flask(__name__)
 
 
-class request_processing:
-    """
-    Processing the GET requests
-    :Author: Lisa Wachter
-    :Version: 2021-02-21
-    """
+@app.route('/informations', methods=['POST', 'GET'])
+def informations():
 
-    def __init__(self):
-        pass
+
+
+    pass
+
+
+@app.route('/statistics', methods=['POST', 'GET'])
+def statistics():
+    pass
+
+
+@app.route('/predictions', methods=['POST', 'GET'])
+def predictions():
+    pass
+

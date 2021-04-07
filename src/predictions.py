@@ -117,6 +117,7 @@ class predictions:
         # sold types from closed containers (status=CLOSED) from a specific country (e.g. China)
         # from a specific min time (e.g. 01-01-2020) in an specific intervall (e.g. m for months)
         # TODO REST GET Request as JSON
+        # TODO make new MockData
         with open('../resources/p2_db_anfrage.json', 'r') as f:
             request = f.read()
 
@@ -282,14 +283,12 @@ class predictions:
         print('a: {}'.format(predictions_arima_log.head()))
 
         predictions_arima = np.exp(predictions_arima_log)
-        plt.plot(indexed_dataset, color='black')
-        plt.plot(predictions_arima, color='red')
-        # TODO model doesn't really fit
+        #plt.plot(indexed_dataset, color='black')
+        #plt.plot(predictions_arima, color='red')
 
         # predict future values
         print(indexed_dataset_log_scale)
         results_arima.plot_predict(1, 99)           # 75 rows + 2 years to predict = 99 steps
-        # TODO confidence intervall to big?
         x = results_arima.forecast(steps=24)
         print(x)
 

@@ -5,18 +5,94 @@ Version: 02.02.2021
 
 
 
-## TODOs
+## Anwendungsfälle
 
-- [ ] Algorithmus umgesetzt
-  - [ ] Informationen umgesetzt
-    - [ ] Use Case I1
-    - [ ] Use Case I2
-  - [ ] Statistiken umgesetzt
-    - [ ] Use Case S1
-    - [ ] Use Case S2
-  - [ ] Prognosen umgesetzt
-    - [ ] Use Case P1
-    - [ ] Use Case P2
+### Informationen
+
+#### I1 Container überfällig
+
+**von Flo:**
+
++ I1
++ Land (wenn kein Land angegeben ist sind es alle Länder)
+
+**an Chris:**
+
++ Land (wenn kein Land angegeben ist sind es alle Länder)
++ (Status: OPEN)
+
+**von Chris:**
+
+* Land (oder Länder)
+* ContainderID
+* Öffnungs-Datum
+* Status: OPEN
+
+```
+{
+  "container": {
+    "status": "OPEN",
+    "country": {
+      "china" : {
+        "container_id" : 1,
+        "open_date" : "2021-01-30"
+      },
+      "russia" : {
+        "container_id" : 2,
+        "open_date" : "2021-01-24"
+      },
+      "usa" : {
+        "container_id" : 3,
+        "open_date" : "2021-01-19"
+      }
+    }
+  }
+}
+```
+
+**an Flo:**
+
+```
+{
+	"container": {
+		"china": {
+			"container_id": 1, 
+			"open_date": "2021-01-30", 
+			"overdue": True
+		}, 
+		"russia": {
+			"container_id": 2, 
+			"open_date": "2021-01-24", 
+			"overdue": True
+		},
+		"usa": {
+			"container_id": 3, 
+			"open_date": "2021-01-19", 
+			"overdue": True
+		}
+	}
+}
+```
+
+
+
+#### I2
+
+**von Flo:**
+
++ 
+
+
+
+### Statistiken
+
+
+
+
+
+### Prognosen
+
+
 
 
 
