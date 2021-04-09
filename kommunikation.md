@@ -152,7 +152,129 @@
 
 ## Statistiken
 
-// TODO
+### S1 Zeitraumabhängiger Anteil
+
+**von Flo:**
+
++ S1
++ Land
++ Startdatum (des Zeitraums)
++ Enddatum (des Zeitraums)
++ Merkmalsart (wenn nichts angegeben dann alles)
+
+**an Chris:**
+
++ S1
++ Land
++ Startdatum (des Zeitraums)
++ Enddatum (des Zeitraums)
++ Merkmalsart (wenn nichts angegeben dann alles)
++ (Status: CLOSED)
+
+**von Chris:**
+
+```json
+{
+  "container": {
+    "status": "CLOSE",
+    "start_time": "01-01-2021",
+    "end_time": "01-02-2021",
+    "type": "",
+    "country": {
+      "china": {
+        "color": {
+          "red": 2,
+          "blue": 5,
+          "green": 10
+        },
+        "brand": {
+          "nike": 7,
+          "adidas": 3,
+          "hm": 7
+        },
+        "category": {
+          "t-shirt": 6,
+          "shoes": 9,
+          "pants": 2
+        },
+        "weight": {
+          "2kg": 4,
+          "3kg": 7,
+          "4kg": 6
+        }
+      }
+    }
+  }
+}
+```
+
+**an Flo:**
+
+```
+{
+  "container": {
+    "china": {
+      "color": {
+        "red": {
+          "abs": 2,
+          "rel": 11.76470588235294
+        },
+        "blue": {
+          "abs": 5,
+          "rel": 29.411764705882355
+        },
+        "green": {
+          "abs": 10,
+          "rel": 58.82352941176471
+        }
+      },
+      "brand": {
+        "nike": {
+          "abs": 7,
+          "rel": 41.17647058823529
+        },
+        "adidas": {
+          "abs": 3,
+          "rel": 17.647058823529413
+        },
+        "hm": {
+          "abs": 7,
+          "rel": 41.17647058823529
+        }
+      },
+      "category": {
+        "t-shirt": {
+          "abs": 6,
+          "rel": 35.294117647058826
+        },
+        "shoes": {
+          "abs": 9,
+          "rel": 52.94117647058824
+        },
+        "pants": {
+          "abs": 2,
+          "rel": 11.76470588235294
+        }
+      },
+      "weight": {
+        "2kg": {
+          "abs": 4,
+          "rel": 23.52941176470588
+        },
+        "3kg": {
+          "abs": 7,
+          "rel": 41.17647058823529
+        },
+        "4kg": {
+          "abs": 6,
+          "rel": 35.294117647058826
+        }
+      }
+    }
+  }
+}
+
+```
 
 
 

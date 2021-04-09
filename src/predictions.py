@@ -313,7 +313,7 @@ class predictions:
 
 if __name__ == "__main__":
     pred = predictions()
-    pred.p1_estimated_delivery('china')
-    #pred.p2_sales_prediction('china', '2020-01-01', 'm')
+    #pred.p1_estimated_delivery('china')
+    pred.p2_sales_prediction('china', '2020-01-01', 'm')
 
 
