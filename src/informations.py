@@ -54,8 +54,9 @@ class informations:
             # build json infos
             response_json += '"container_id": {}, '.format(containers['country'][c]['container_id'])
             response_json += '"open_date": "{}", '.format(containers['country'][c]['open_date'])
-            response_json += '"overdue": {}'.format(overdue)
-            if i < len(request_json['container']):
+            response_json += '"overdue": {}'.format(str(overdue).lower())
+
+            if i < len(containers['country']):
                 response_json += '}, '
             else:
                 response_json += '}'
@@ -104,7 +105,7 @@ class informations:
             response_json += '"curr_weight_kg": {}, '.format(containers['country'][c]['curr_weight_kg'])
             response_json += '"max_weight_kg": {}, '.format(containers['country'][c]['max_weight_kg'])
             response_json += '"utilization": {}'.format(utilization)
-            if i < len(request_json['container']):
+            if i < len(containers['country']):
                 response_json += '}, '
             else:
                 response_json += '}'

@@ -49,24 +49,24 @@
 
 ```json
 {
-	"container": {
-		"china": {
-			"container_id": 1, 
-			"open_date": "2021-01-30", 
-			"overdue": True
-		}, 
-		"russia": {
-			"container_id": 2, 
-			"open_date": "2021-01-24", 
-			"overdue": True
-		},
-		"usa": {
-			"container_id": 3, 
-			"open_date": "2021-01-19", 
-			"overdue": True
-		},
+  "container": {
+    "china": {
+      "container_id": 1,
+      "open_date": "2021-01-30",
+      "overdue": true
+    },
+    "russia": {
+      "container_id": 2,
+      "open_date": "2021-01-24",
+      "overdue": true
+    },
+    "usa": {
+      "container_id": 3,
+      "open_date": "2021-01-19",
+      "overdue": true
+    },
     ...
-	}
+  }
 }
 ```
 
@@ -117,34 +117,33 @@
     }
   }
 }
-
 ```
 
 **an Flo:**
 
 ```json
 {
-	"container": {
-		"china": {
-			"container_id": 1, 
-			"curr_weight_kg": 22, 
-			"max_weight_kg": 25, 
-			"utilization": 88.0
-		}, 
-		"russia": {
-			"container_id": 2, 
-			"curr_weight_kg": 8, 
-			"max_weight_kg": 25, 
-			"utilization": 32.0
-		},
-		"usa": {
-			"container_id": 3, 
-			"curr_weight_kg": 15, 
-			"max_weight_kg": 25, 
-			"utilization": 60.0
-		},
+  "container": {
+    "china": {
+      "container_id": 1,
+      "curr_weight_kg": 22,
+      "max_weight_kg": 25,
+      "utilization": 88.0
+    },
+    "russia": {
+      "container_id": 2,
+      "curr_weight_kg": 8,
+      "max_weight_kg": 25,
+      "utilization": 32.0
+    },
+    "usa": {
+      "container_id": 3,
+      "curr_weight_kg": 15,
+      "max_weight_kg": 25,
+      "utilization": 60.0
+    },
     ...
-	}
+  }
 }
 ```
 
@@ -353,14 +352,14 @@
 
 **an Flo:**
 
-```
+```json
 {
-	"container": {
-		"country": "china", 
-		"create_date": "2021-02-20", 
-		"close_date_forecast": "2021-03-19", 
-		"accuracy": "20.0"
-	}
+  "container": {
+    "country": "china",
+    "create_date": "2021-02-20",
+    "close_date_forecast": "2021-03-19",
+    "accuracy": "20.0"
+  }
 }
 ```
 
