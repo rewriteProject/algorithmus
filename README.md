@@ -14,12 +14,12 @@ Version: 02.02.2021
 
 ### Statistiken
 
-- [ ] S1
+- [x] S1
 
 ### Prognosen
 
 - [x] P1 Erwartetes Lieferdatum
-- [ ] P2 Merkmalsentwicklung
+- [x] P2 Merkmalsentwicklung
 
 
 
@@ -41,4 +41,4 @@ https://www.youtube.com/watch?v=e8Yw4alG16Q (main)
 
 https://towardsdatascience.com/programmatic-identification-of-support-resistance-trend-lines-with-python-d797a4a90530
 
-https://www.bounteous.com/insights/2020/09/15/forecasting-time-series-model-using-python-part-one/
+https://www.bounteous.com/insights/2020/09/15/forecasting-time-series-model-using-python-part-one/s

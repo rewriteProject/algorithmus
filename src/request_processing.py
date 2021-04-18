@@ -3,7 +3,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
-@app.route('/informations', methods=['POST', 'GET'])
+@app.route('/informations', methods=['POST'])
 def informations():
 
 
@@ -11,12 +11,15 @@ def informations():
     pass
 
 
-@app.route('/statistics', methods=['POST', 'GET'])
+@app.route('/statistics', methods=['POST'])
 def statistics():
     pass
 
 
-@app.route('/predictions', methods=['POST', 'GET'])
+@app.route('/predictions', methods=['POST'])
 def predictions():
     pass
 
+
+if __name__ == "__main__":
+    app.run()

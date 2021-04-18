@@ -10,7 +10,10 @@ import numpy as np
 import pandas as pd
 from matplotlib import rcParams
 from statsmodels.tsa.stattools import adfuller
-from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.seasonal import seasonal_decompose
+from statsmodels.tsa.stattools import acf, pacf
+from statsmodels.tsa.arima_model import ARIMA, ARIMA_DEPRECATION_WARN
+
 
 
 class predictions:
@@ -103,6 +106,7 @@ class predictions:
         # sold types from closed containers (status=CLOSED) from a specific country (e.g. China)
         # from a specific min time (e.g. 01-01-2020) in an specific intervall (e.g. m for months)
         # TODO REST GET Request as JSON
+        # TODO make new MockData
         with open('../resources/p2_db_anfrage.json', 'r') as f:
             request = f.read()
 
@@ -128,12 +132,16 @@ class predictions:
         # ready data
         dataset['Date'] = pd.to_datetime(dataset['Date'], infer_datetime_format=True)
         indexed_dataset = dataset.set_index(['Date'])
-        #print("Dataset: {}".format(indexed_dataset))
+        #print(indexed_dataset)
+        mean = indexed_dataset.mean(axis=0)
+        #print("mean: {}".format(mean))
+        median = indexed_dataset.median(axis=0)
+        #print("median: {}".format(median))
+
 
         # plot original data
-        #plt.xlabel('Date')
-        #plt.ylabel('Amount')
-        #print("Plotting original dataset")
+        plt.xlabel('Date')
+        plt.ylabel('Amount')
         #plt.plot(indexed_dataset)
 
         # test stationary of indexed data
@@ -145,14 +153,46 @@ class predictions:
         # take the log of the data
         indexed_dataset_log_scale = np.log(indexed_dataset)
         #pd.set_option('display.max_rows', None)
+
         print("indexed_dataset_log_scale start")
         print(indexed_dataset_log_scale)
         print("indexed_dataset_log_scale end")
-        #self.stationary_test(indexed_dataset_log_scale)
+        #moving_average = indexed_dataset_log_scale.rolling(window=12).mean()
+        #indexed_dataset_log_scale_minus_moving_average = (indexed_dataset_log_scale - moving_average)
+
+        # remove NaN values
+        #indexed_dataset_log_scale_minus_moving_average.dropna(inplace=True)
+        #indexed_dataset_log_scale_minus_moving_average.fillna(0)
+        # TODO NAN vs NA values rausnehmen
+        # TODO alle 0 werte zu einem 1 machen - log(1) = 0 // befor ich log anwende
+
+        #print("start 1")
+        #print(indexed_dataset_log_scale_minus_moving_average)
+        #print("end 1")
+
+        # test stationary of data
+        #self.stationary_test(indexed_dataset_log_scale_minus_moving_average)
+
+        # exponential transformation
+        #exponential_decay_weight_average = indexed_dataset_log_scale.ewm(halflife=12, min_periods=0, adjust=True).mean()
+        #plt.plot(indexed_dataset_log_scale)
+        #plt.plot(exponential_decay_weight_average, color='red')
+
+        # log scale - weigthed average transformation
+        #dataset_log_scale_minus_moving_exponential_decay_average = indexed_dataset_log_scale - exponential_decay_weight_average
+        #self.stationary_test(dataset_log_scale_minus_moving_exponential_decay_average)
 
         # **********************************************************************************************
         # ************************************ timeseries analalysis ***********************************
         # **********************************************************************************************
+        dataset_log_diff_shifting = (indexed_dataset_log_scale - indexed_dataset_log_scale.shift(fill_value=0))
+        print("dataset_log_diff_shifting start")
+        print(dataset_log_diff_shifting)
+        print("dataset_log_diff_shifting end")
+        plt.plot(dataset_log_diff_shifting)
+        dataset_log_diff_shifting.dropna(inplace=True)
+        #self.stationary_test(dataset_log_diff_shifting)
+
         '''
         # seasonal analysis
         decomposition = seasonal_decompose(indexed_dataset_log_scale)
@@ -163,6 +203,7 @@ class predictions:
         print("residual start")
         print(residual)
         print("residual end")
+
 
         plt.subplot(411)
         plt.plot(indexed_dataset_log_scale, label="Original")
@@ -177,97 +218,88 @@ class predictions:
         plt.plot(residual, label='Residuals')
         plt.legend(loc='best')
         plt.tight_layout()
+
+        decomposed_log_data = residual
+        decomposed_log_data.dropna(inplace=True)
+        print("decomposed_log_data start")
+        print(decomposed_log_data)
+        print("decomposed_log_data end")
+        self.stationary_test(decomposed_log_data)      # TODO error occurs
         '''
+
+        '''
+        # ACF & PACF plots
+        lag_acf = acf(dataset_log_diff_shifting, nlags=20)
+        lag_pacf = pacf(dataset_log_diff_shifting, nlags=20, method='ols')
+
+
+        # autocorrelation graph (for Q)
+        plt.subplot(121)
+        plt.plot(lag_acf)
+        plt.axhline(y=0, linestyle='--', color='gray')
+        plt.axhline(y=-1.96/np.sqrt(len(dataset_log_diff_shifting)), linestyle='--', color='gray')
+        plt.axhline(y=1.96/np.sqrt(len(dataset_log_diff_shifting)), linestyle='--', color='gray')
+        plt.title('Autocorrelation function')
+
+        # partial atocorrelation graph (for P)
+        plt.subplot(122)
+        plt.plot(lag_pacf)
+        plt.axhline(y=0, linestyle='--', color='gray')
+        plt.axhline(y=-1.96/np.sqrt(len(dataset_log_diff_shifting)), linestyle='--', color='gray')
+        plt.axhline(y=1.96/np.sqrt(len(dataset_log_diff_shifting)), linestyle='--', color='gray')
+        plt.title('Partial Autocorrelation function')
+        plt.tight_layout()
+        '''
+
+        # https://www.youtube.com/watch?v=e8Yw4alG16Q - 31:00
 
         # **********************************************************************************************
         # ***************************************** ARIMA model ****************************************
         # **********************************************************************************************
+
+        print("indexed_dataset_log_scale")
+        pd.set_option('display.max_rows', None)
+        print(indexed_dataset_log_scale)
         model = ARIMA(indexed_dataset_log_scale, order=(0, 1, 4))
         results_arima = model.fit(disp=-1)
         #plt.plot(dataset_log_diff_shifting)
         #plt.plot(results_arima.fittedvalues, color='red')
         #plt.title('RSS: %.4f' % sum((results_arima.fittedvalues - dataset_log_diff_shifting['Amount'])**2))
+        print('Plotting ARIMA Model')
 
         # **********************************************************************************************
         # ***************************************** predictions ****************************************
         # **********************************************************************************************
-        print('Plotting ARIMA Model')
+        
+        predictions_arima_diff = pd.Series(results_arima.fittedvalues, copy=True)
+        print("predictions_arima_diff")
+        print(predictions_arima_diff.head())
+
+        # convert to cumulative sum
+        predictions_arima_diff_cumsum = predictions_arima_diff.cumsum()
+        print("predictions_arima_diff_cumsum")
+        print(predictions_arima_diff_cumsum.head())
+
+        predictions_arima_log = pd.Series(indexed_dataset_log_scale['Amount'], index=indexed_dataset_log_scale.index)
+        predictions_arima_log = predictions_arima_log.add(predictions_arima_diff_cumsum, fill_value=0)
+        print("testtest start")
+        print('a: {}'.format(predictions_arima_log.head()))
+        print("testtest end")
+
+        predictions_arima = np.exp(predictions_arima_log)
+        plt.plot(indexed_dataset, color='black')
+        plt.plot(predictions_arima, color='red')
+
+        # predict future values
+        #print(indexed_dataset_log_scale)
         results_arima.plot_predict(1, 99)           # 75 rows + 2 years to predict = 99 steps
         x = results_arima.forecast(steps=24)
-        #print(x)
-
-        # **********************************************************************************************
-        # ***************************************** build JSON *****************************************
-        # **********************************************************************************************
-        last_date = indexed_dataset.tail(1).index[0]
-        print(last_date)
-        date1 = last_date + pd.DateOffset(months=1)
-        print(date1)
-
-        # build forecast as json
-        forecast_json = '{ "forecast": { '
-
-        # add average forecast
-        forecast_json += '"averages": { '
-        d = last_date + pd.DateOffset(months=1)
-        i = 1
-        for a in x[0]:
-            if i < len(x[0]):
-                forecast_json += '"{}": {}, '.format(str(d)[:10], math.exp(a))
-            else:
-                forecast_json += '"{}": {}'.format(str(d)[:10], math.exp(a))
-            d = d + pd.DateOffset(months=1)
-            i += 1
-        forecast_json += ' }, '
-
-        # add standard deviation
-        forecast_json += '"deviations": { '
-        d = last_date + pd.DateOffset(months=1)
-        i = 1
-        for s in x[1]:
-            if i < len(x[1]):
-                forecast_json += '"{}": {}, '.format(str(d)[:10], math.exp(s))
-            else:
-                forecast_json += '"{}": {}'.format(str(d)[:10], math.exp(s))
-            d = d + pd.DateOffset(months=1)
-            i += 1
-        forecast_json += ' }, '
-
-        # add confidence intervall
-        forecast_json += '"confidence": { '
-        d = last_date + pd.DateOffset(months=1)
-        i = 1
-        for c in x[2]:
-            if i < len(x[2]):
-                forecast_json += '"{}": '.format(str(d)[:10])
-                forecast_json += '{ '
-                forecast_json += '"lower": {},  '.format(math.exp(c[0]))
-                forecast_json += '"upper": {}'.format(math.exp(c[1]))
-                forecast_json += ' }, '
-            else:
-                forecast_json += '"{}": '.format(str(d)[:10])
-                forecast_json += '{ '
-                forecast_json += '"lower": {},  '.format(math.exp(c[0]))
-                forecast_json += '"upper": {}'.format(math.exp(c[1]))
-                forecast_json += ' }'
-            d = d + pd.DateOffset(months=1)
-            i += 1
-        forecast_json += '}'
-        forecast_json += '}}'
-        forecast_json = json.loads(forecast_json)
-
-        # add old data to forecast data
-        response_json = "{ 'response': "
-        response_json += "{},".format(request_json)
-        response_json += "{}".format(str(forecast_json)[1:(len(str(forecast_json))-1)])
-        response_json += "}"
-        print(response_json.replace("'", "\""))
+        print(x)
 
         # show plot
-        #plt.show()
+        plt.show()
 
-        # return JSON with information
-        return response_json
+        # TODO sending JSON back
 
     def stationary_test(self, timeseries):
         """
