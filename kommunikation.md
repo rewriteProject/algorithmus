@@ -372,7 +372,7 @@
 + P2
 + Land
 + Merkmalsart
-+ Merkmal (Wenn kein Merkmal angegeben ist sind es alle Merkmale)
++ Merkmal
 + Startdatum
 + Intervall [y ... year, m ... month, d ... day]
 
@@ -381,7 +381,7 @@
 * P2
 * Land
 * Merkmalsart
-* Merkmal (Wenn kein Merkmal angegeben ist sind es alle Merkmale)
+* Merkmal
 * Startdatum
 * Intervall [y ... year, m ... month, d ... day]
 * (Status: CLOSE)
@@ -390,7 +390,7 @@
 
 + Land
 + Merkmalsart
-+ Merkmal (Wenn kein Merkmal angegeben ist sind es alle Merkmale)
++ Merkmal
 + Startdatum
 + Intervall 
 + Intervall-Werte für jedes Merkmal pro Merkmalsart
