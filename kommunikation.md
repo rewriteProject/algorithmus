@@ -240,35 +240,7 @@
           "abs": 7,
           "rel": 41.17647058823529
         }
-      },
-      "category": {
-        "t-shirt": {
-          "abs": 6,
-          "rel": 35.294117647058826
-        },
-        "shoes": {
-          "abs": 9,
-          "rel": 52.94117647058824
-        },
-        "pants": {
-          "abs": 2,
-          "rel": 11.76470588235294
-        }
-      },
-      "weight": {
-        "2kg": {
-          "abs": 4,
-          "rel": 23.52941176470588
-        },
-        "3kg": {
-          "abs": 7,
-          "rel": 41.17647058823529
-        },
-        "4kg": {
-          "abs": 6,
-          "rel": 35.294117647058826
-        }
-      }
+      }, ...
     }
   }
 }
@@ -285,7 +257,6 @@
 
 + P1
 + Land
-+ Startdatum
 
 **an Chris (Anfrage 1):**
 
@@ -373,8 +344,6 @@
 + Land
 + Merkmalsart
 + Merkmal
-+ Startdatum
-+ Intervall [y ... year, m ... month, d ... day]
 
 **an Chris:**
 

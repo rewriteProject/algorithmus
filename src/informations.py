@@ -10,7 +10,8 @@ class informations:
     :Version: 2021-02-21
     """
 
-    def i1_container_overdue(self, country=''):
+    @staticmethod
+    def i1_container_overdue(country=''):
         """
         Use Case I1
         How many conatiners are still open?
@@ -67,7 +68,8 @@ class informations:
         # return json
         return response_json
 
-    def i2_conatiner_utilization(self, country=''):
+    @staticmethod
+    def i2_container_utilization(country=''):
         """
         Use Case I2
         container weight utilization
@@ -118,8 +120,5 @@ class informations:
 
 
 if __name__ == "__main__":
-    info = informations()
-    info.i1_container_overdue()
-    info.i1_container_overdue('china')
-    info.i2_conatiner_utilization()
-    info.i2_conatiner_utilization('china')
+    informations.i1_container_overdue()
+    informations.i2_container_utilization()

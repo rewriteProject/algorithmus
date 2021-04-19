@@ -21,7 +21,8 @@ class predictions:
     :Version: 2021-02-27
     """
 
-    def p1_estimated_delivery(self, country):
+    @staticmethod
+    def p1_estimated_delivery(country):
         """
         Use Case P1
         Predicts the estimated delivery/closing date of a container that goes into a certain country
@@ -42,16 +43,16 @@ class predictions:
         request_json = json.loads(request)
 
         # calculate opening time
-        average_times = []
+        open_times = []
         dates = request_json["container"]["dates"]
         for d in dates:
             open_date = datetime.strptime(dates[d]["open_date"], '%Y-%m-%d').date()
             close_date = datetime.strptime(dates[d]["close_date"], '%Y-%m-%d').date()
             duration = close_date - open_date
             dif = duration.days
-            average_times.append(dif)
-        average_times.sort()  # sort list for median calculation
-        median = int(math.ceil(statistics.median(average_times)))  # calculate median
+            open_times.append(dif)
+        open_times.sort()                                            # sort list for median calculation
+        median = int(math.ceil(statistics.median(open_times)))       # calculate median
         median_days = pd.Timedelta(days=median)
 
         # **********************************************************************************************
@@ -73,11 +74,11 @@ class predictions:
         # **************** calculate accuracy of the estimated delivery date prediction ****************
         # **********************************************************************************************
         # make array a numpy array
-        average_times_numpy = np.array(average_times)
+        open_times_numpy = np.array(open_times)
         # calculate absolute frequency
-        count_median_abs = np.count_nonzero(average_times_numpy == median)
+        count_median_abs = np.count_nonzero(open_times_numpy == median)
         # calculate relative frequency
-        list_length = len(average_times)
+        list_length = len(open_times)
         accuracy = (count_median_abs / list_length) * 100  # in percent
 
         # build response JSON
@@ -90,7 +91,8 @@ class predictions:
         print(response_json)
         return response_json
 
-    def p2_sales_prediction(self, country, min_time, intervall):
+    @staticmethod
+    def p2_sales_prediction(country, f_type, feature):
         """
         Use Case P2
         Predicts the sales of a certain protuct type
@@ -137,7 +139,7 @@ class predictions:
         #plt.plot(indexed_dataset)
 
         # test stationary of indexed data
-        #self.stationary_test(indexed_dataset)
+        #predictions.stationary_test(indexed_dataset)
 
         # **********************************************************************************************
         # ************************************ make data stationary *************************************
@@ -148,7 +150,7 @@ class predictions:
         print("indexed_dataset_log_scale start")
         print(indexed_dataset_log_scale)
         print("indexed_dataset_log_scale end")
-        #self.stationary_test(indexed_dataset_log_scale)
+        #predictions.stationary_test(indexed_dataset_log_scale)
 
         # **********************************************************************************************
         # ************************************ timeseries analalysis ***********************************
@@ -191,18 +193,16 @@ class predictions:
         # **********************************************************************************************
         # ***************************************** predictions ****************************************
         # **********************************************************************************************
-        print('Plotting ARIMA Model')
-        results_arima.plot_predict(1, 99)           # 75 rows + 2 years to predict = 99 steps
-        x = results_arima.forecast(steps=24)
+        #print('Plotting ARIMA Model')
+        #results_arima.plot_predict(1, 99)          # 75 rows + 2 years to predict = 99 steps
+        x = results_arima.forecast(steps=24)        # 24 steps = 2 years
         #print(x)
 
         # **********************************************************************************************
         # ***************************************** build JSON *****************************************
         # **********************************************************************************************
         last_date = indexed_dataset.tail(1).index[0]
-        print(last_date)
         date1 = last_date + pd.DateOffset(months=1)
-        print(date1)
 
         # build forecast as json
         forecast_json = '{ "forecast": { '
@@ -261,7 +261,8 @@ class predictions:
         response_json += "{},".format(request_json)
         response_json += "{}".format(str(forecast_json)[1:(len(str(forecast_json))-1)])
         response_json += "}"
-        print(response_json.replace("'", "\""))
+        #print(response_json.replace("'", "\""))
+        response_json = response_json.replace("'", "\"")
 
         # show plot
         #plt.show()
@@ -269,7 +270,8 @@ class predictions:
         # return JSON with information
         return response_json
 
-    def stationary_test(self, timeseries):
+    @staticmethod
+    def stationary_test(timeseries):
         """
         Tests the stationaryity of timesries data
         :param timeseries: the timeseries data
@@ -296,8 +298,7 @@ class predictions:
 
 
 if __name__ == "__main__":
-    pred = predictions()
-    #pred.p1_estimated_delivery('china')
-    pred.p2_sales_prediction('china', '2020-01-01', 'm')
+    #predictions.p1_estimated_delivery('china')
+    predictions.p2_sales_prediction('china', '2020-01-01', 'm')
 
 

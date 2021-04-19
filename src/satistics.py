@@ -9,7 +9,8 @@ class statistics:
     :Version: 2021-02-22
     """
 
-    def s1_products_in_timespan(self, country, min, max, type=""):
+    @staticmethod
+    def s1_products_in_timespan(country, min, max, type=""):
         """
         Use Case S1
         Calculate the absolute and relative amount of a product category in a certain timespan.
@@ -86,5 +87,4 @@ class statistics:
 
 
 if __name__ == "__main__":
-    s = statistics()
-    s.s1_products_in_timespan("a", "1", "2")
+    statistics.s1_products_in_timespan("a", "1", "2")
