@@ -8,6 +8,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import requests
 from matplotlib import rcParams
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima_model import ARIMA
@@ -35,7 +36,11 @@ class predictions:
         # data request from DB
         # create_date and close_date of closed containers (status=CLOSED)
         # from a specific country (e.g. China) from a specific timespan (e.g. last 2 years)
-        # TODO REST GET Request as JSON
+        # REST GET Request as JSON
+        url = 'localhost:8081/analytics/forecast/p1-1/{}'.format(country)
+        params = {'minDate': '2015-01-01'}
+        request = requests.post(url, params)
+
         with open('../resources/p1_db_anfrage_1.json', 'r') as f:
             request = f.read()
 
@@ -60,7 +65,10 @@ class predictions:
         # **********************************************************************************************
         # date request from DB
         # create_date of current container (status=OPEN) from certain country
-        # TODO REST GET Requst as JSON
+        # REST GET Requst as JSON
+        url_2 = 'localhost:8081/analytics/forecast/p1-2/{}'.format(country)
+        request_2 = requests.post(url)
+
         with open('../resources/p1_db_anfrage_2.json', 'r') as f:
             request_2 = f.read()
         # convert request to json
@@ -104,7 +112,12 @@ class predictions:
         # data request from DB
         # sold types from closed containers (status=CLOSED) from a specific country (e.g. China)
         # from a specific min time (e.g. 01-01-2020) in an specific intervall (e.g. m for months)
-        # TODO REST GET Request as JSON
+        # REST GET Request as JSON
+        url = 'localhost:8081/analytics/forecast/p2/{}'.format(country)
+        params = {'minDate': '2015-01-01', 'year': '2015', 'typ': f_type, 'feature': feature}
+        request = requests.post(url, params)
+
+
         with open('../resources/p2_db_anfrage.json', 'r') as f:
             request = f.read()
 

@@ -1,5 +1,7 @@
 import json
 
+import requests
+
 
 class statistics:
     """
@@ -21,7 +23,17 @@ class statistics:
         :return: JSON with information
         """
         # data request for types in country and timespan + container CLOSED
-        # TODO REST GET
+        # REST GET
+        if type == '':
+            url = 'localhost:8081/analytics/statistics/{}/all'.format(country)
+            params = {'minDate': min, 'maxDate': max}
+            request = requests.post(url, params)
+        else:
+            url = 'localhost:8081/analytics/statistics/{}/{}'.format(country, type)
+            print(url)
+            params = {'minDate': min, 'maxDate': max}
+            request = requests.post(url, params)
+
         with open('../resources/s1_db_anfrage.json', 'r') as f:
             request = f.read()
 

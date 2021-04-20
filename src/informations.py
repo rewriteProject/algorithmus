@@ -1,5 +1,6 @@
 import datetime
 import json
+import requests
 
 
 class informations:
@@ -21,7 +22,15 @@ class informations:
         :return: JSON with information
         """
         # data request for country, container_id, create_date with status = OPEN
-        # TODO REST GET Request as JSON
+        # REST GET Request as JSON
+        if country == '':
+            url = 'localhost:8081/analytics/information/i1/all'
+            request_json = requests.post(url)
+        else:
+            url = 'localhost:8081/analytics/information/i1/{}'.format(country)
+            print(url)
+            request_json = requests.post(url)
+
         with open('../resources/i1_db_anfrage.json', 'r') as f:
             request = f.read()
 
@@ -78,6 +87,14 @@ class informations:
         """
         # data request for country, container_id, curr_weight_kg, max_weight_kg with status = OPEN
         # TODO REST GET Request as JSON
+        if country == '':
+            url = 'localhost:8081/analytics/information/i2/all'
+            request = requests.post(url)
+        else:
+            url = 'localhost:8081/analytics/information/i2/{}'.format(country)
+            print(url)
+            request = requests.post(url)
+
         with open('../resources/i2_db_anfrage.json', 'r') as f:
             request = f.read()
 
