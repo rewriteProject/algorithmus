@@ -41,11 +41,11 @@ class predictions:
         params = {'minDate': '2015-01-01'}
         request = requests.post(url, params)
 
-        with open('../resources/p1_db_anfrage_1.json', 'r') as f:
-            request = f.read()
+        #with open('../resources/p1_db_anfrage_1.json', 'r') as f:
+            #request = f.read()
 
         # convert request to json
-        request_json = json.loads(request)
+        request_json = json.loads(request.json())
 
         # calculate opening time
         open_times = []
@@ -69,10 +69,11 @@ class predictions:
         url_2 = 'localhost:8081/analytics/forecast/p1-2/{}'.format(country)
         request_2 = requests.post(url)
 
-        with open('../resources/p1_db_anfrage_2.json', 'r') as f:
-            request_2 = f.read()
+        #with open('../resources/p1_db_anfrage_2.json', 'r') as f:
+            #request_2 = f.read()
+
         # convert request to json
-        request_json_2 = json.loads(request_2)
+        request_json_2 = json.loads(request_2.json())
         open_date_2 = request_json_2["container"]["create_date"]
 
         # calculate delivery date
@@ -117,12 +118,11 @@ class predictions:
         params = {'minDate': '2015-01-01', 'year': '2015', 'typ': f_type, 'feature': feature}
         request = requests.post(url, params)
 
-
-        with open('../resources/p2_db_anfrage.json', 'r') as f:
-            request = f.read()
+        #with open('../resources/p2_db_anfrage.json', 'r') as f:
+            #request = f.read()
 
         # convert request to json
-        request_json = json.loads(request)
+        request_json = json.loads(request.json())
 
         # convert to csv
         with open('data.csv', 'w') as csvfile:
