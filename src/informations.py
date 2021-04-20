@@ -3,6 +3,10 @@ import json
 import requests
 
 
+import os
+chirs_address = os.environ['CHRIS_ADDRESS']
+chris_port = os.environ['CHRIS_PORT']
+
 class informations:
     """
     Simple information management and analysis
@@ -24,10 +28,10 @@ class informations:
         # data request for country, container_id, create_date with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = 'localhost:8081/analytics/information/i1/all'
+            url = str(chirs_address) + str(chris_port) + '/analytics/information/i1/all'
             request = requests.post(url)
         else:
-            url = 'localhost:8081/analytics/information/i1/{}'.format(country)
+            url = str(chirs_address) + str(chris_port) + '/analytics/information/i1/{}'.format(country)
             print(url)
             request = requests.post(url)
 
@@ -88,10 +92,10 @@ class informations:
         # data request for country, container_id, curr_weight_kg, max_weight_kg with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = 'localhost:8081/analytics/information/i2/all'
+            url = str(chirs_address) + str(chris_port) + '/analytics/information/i2/all'
             request = requests.post(url)
         else:
-            url = 'localhost:8081/analytics/information/i2/{}'.format(country)
+            url = str(chirs_address) + str(chris_port) + '/analytics/information/i2/{}'.format(country)
             print(url)
             request = requests.post(url)
 

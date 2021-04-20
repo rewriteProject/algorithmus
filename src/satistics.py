@@ -1,7 +1,9 @@
 import json
 
 import requests
-
+import os
+chris_address = os.environ['CHRIS_ADDRESS']
+chris_port = os.environ['CHRIS_PORT']
 
 class statistics:
     """
@@ -25,11 +27,11 @@ class statistics:
         # data request for types in country and timespan + container CLOSED
         # REST GET
         if type == '':
-            url = 'localhost:8081/analytics/statistics/{}/all'.format(country)
+            url = str(chris_address) + str(chris_port) + '/analytics/statistics/{}/all'.format(country)
             params = {'minDate': min, 'maxDate': max}
             request = requests.post(url, params)
         else:
-            url = 'localhost:8081/analytics/statistics/{}/{}'.format(country, type)
+            url = str(chris_address) + str(chris_port) + '/analytics/statistics/{}/{}'.format(country, type)
             print(url)
             params = {'minDate': min, 'maxDate': max}
             request = requests.post(url, params)
