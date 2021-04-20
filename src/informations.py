@@ -33,13 +33,13 @@ class informations:
         else:
             url = str(chris_address) + str(chris_port) + '/analytics/information/i1/{}'.format(country)
             print(url)
-            request_json = requests.post(url)
+            request = requests.post(url)
 
-        with open('../resources/i1_db_anfrage.json', 'r') as f:
-            request = f.read()
+        #with open('../resources/i1_db_anfrage.json', 'r') as f:
+            #request = f.read()
 
         # convert request to json
-        request_json = json.loads(request)
+        request_json = json.loads(request.json())
 
         # get current date
         curr_date = datetime.date.today()
@@ -90,7 +90,7 @@ class informations:
         :return: json with information
         """
         # data request for country, container_id, curr_weight_kg, max_weight_kg with status = OPEN
-        # TODO REST GET Request as JSON
+        # REST GET Request as JSON
         if country == '':
             url = str(chirs_address) + str(chris_port) + '/analytics/information/i2/all'
             request = requests.post(url)
@@ -99,11 +99,11 @@ class informations:
             print(url)
             request = requests.post(url)
 
-        with open('../resources/i2_db_anfrage.json', 'r') as f:
-            request = f.read()
+        #with open('../resources/i2_db_anfrage.json', 'r') as f:
+            #request = f.read()
 
         # convert request to json
-        request_json = json.loads(request)
+        request_json = json.loads(request.json())
 
         response_json = '{"container": {'
         containers = request_json['container']

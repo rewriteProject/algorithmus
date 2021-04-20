@@ -36,11 +36,11 @@ class statistics:
             params = {'minDate': min, 'maxDate': max}
             request = requests.post(url, params)
 
-        with open('../resources/s1_db_anfrage.json', 'r') as f:
-            request = f.read()
+        #with open('../resources/s1_db_anfrage.json', 'r') as f:
+            #request = f.read()
 
         # convert request to json
-        request_json = json.loads(request)
+        request_json = json.loads(request.json())
 
         container = request_json['container']
 
