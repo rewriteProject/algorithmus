@@ -261,8 +261,8 @@ class predictions:
         response_json += "{},".format(request_json)
         response_json += "{}".format(str(forecast_json)[1:(len(str(forecast_json))-1)])
         response_json += "}"
-        #print(response_json.replace("'", "\""))
         response_json = response_json.replace("'", "\"")
+        print(response_json)
 
         # show plot
         #plt.show()

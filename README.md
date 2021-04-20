@@ -27,6 +27,58 @@ Die genaue Beschreibung der Kommunikation ist [hier](kommunikation.md) zu finden
 
 
 
+## Routen
+
+Wir mit `Flask` erstellt auf Port `5000`.
+
+Alle Routes sind `POST` Routes.
+
+Die Parameter müssen alle *genau* so heißen wie angegeben!
+
+
+
+### Infromationen
+
+```
+localhost:5000/informations
+```
+
+`localhost` muss dann natürch mit der IP des Servers ausgetauscht werden.
+
+**Parameter für I1 und I2**
+
+`case` (I1 oder I2), `country`
+
+### Statistiken
+
+```
+localhost:5000/statistics
+```
+
+`localhost` muss dann natürch mit der IP des Servers ausgetauscht werden.
+
+**Parameter für S1**
+
+`case` (S1), `countr`, `min`, `max`, `type`
+
+### Prognosen
+
+```
+localhost:5000/predictions
+```
+
+`localhost` muss dann natürch mit der IP des Servers ausgetauscht werden.
+
+**Parameter für P1**
+
+`case` (P1), `country`
+
+**Parameter für P2**
+
+`case` (P2), `country`, `feature_type`, `feature`
+
+
+
 
 
 
