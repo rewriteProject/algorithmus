@@ -4,7 +4,7 @@ import requests
 
 
 import os
-chirs_address = os.environ['CHRIS_ADDRESS']
+chris_address = os.environ['CHRIS_ADDRESS']
 chris_port = os.environ['CHRIS_PORT']
 
 class informations:
@@ -28,10 +28,10 @@ class informations:
         # data request for country, container_id, create_date with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = str(chirs_address) + str(chris_port) + '/analytics/information/i1/all'
+            url = str(chris_address) + str(chris_port) + '/analytics/information/i1/all'
             request_json = requests.post(url)
         else:
-            url = str(chirs_address) + str(chris_port) + '/analytics/information/i1/{}'.format(country)
+            url = str(chris_address) + str(chris_port) + '/analytics/information/i1/{}'.format(country)
             print(url)
             request_json = requests.post(url)
 
