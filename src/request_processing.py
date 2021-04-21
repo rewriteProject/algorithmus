@@ -7,6 +7,7 @@ import informations
 import satistics
 import predictions
 
+import os
 server_port = os.environ['SERVER_PORT']
 server_host = os.environ['SERVER_HOST']
 
