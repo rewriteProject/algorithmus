@@ -14,7 +14,7 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima_model import ARIMA
 
 import os
-chirs_address = os.environ['CHRIS_ADDRESS']
+chris_address = os.environ['CHRIS_ADDRESS']
 chris_port = os.environ['CHRIS_PORT']
 
 
@@ -41,7 +41,7 @@ class predictions:
         # create_date and close_date of closed containers (status=CLOSED)
         # from a specific country (e.g. China) from a specific timespan (e.g. last 2 years)
         # REST GET Request as JSON
-        url = str(chirs_address) + str(chris_port) + '/analytics/forecast/p1-1/{}'.format(country)
+        url = str(chris_address) + str(chris_port) + '/analytics/forecast/p1-1/{}'.format(country)
         params = {'minDate': '2015-01-01'}
         request = requests.post(url, params)
 
@@ -70,7 +70,7 @@ class predictions:
         # date request from DB
         # create_date of current container (status=OPEN) from certain country
         # REST GET Requst as JSON
-        url_2 = str(chirs_address) + str(chris_port) + '/analytics/forecast/p1-2/{}'.format(country)
+        url_2 = str(chris_address) + str(chris_port) + '/analytics/forecast/p1-2/{}'.format(country)
         request_2 = requests.post(url_2)
 
         #with open('../resources/p1_db_anfrage_2.json', 'r') as f:
@@ -118,7 +118,7 @@ class predictions:
         # sold types from closed containers (status=CLOSED) from a specific country (e.g. China)
         # from a specific min time (e.g. 01-01-2020) in an specific intervall (e.g. m for months)
         # REST GET Request as JSON
-        url = str(chirs_address) + str(chris_port) + '/analytics/forecast/p2/{}'.format(country)
+        url = str(chris_address) + str(chris_port) + '/analytics/forecast/p2/{}'.format(country)
         params = {'minDate': '2015-01-01', 'year': '2015', 'typ': f_type, 'feature': feature}
         request = requests.post(url, params)
 
