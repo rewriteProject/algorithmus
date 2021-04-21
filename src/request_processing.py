@@ -7,6 +7,9 @@ import informations
 import satistics
 import predictions
 
+server_port = os.environ['SERVER_PORT']
+server_host = os.environ['SERVER_HOST']
+
 app = Flask(__name__)
 
 
@@ -79,4 +82,4 @@ def predictions_route():
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=9002)
+    app.run(host=server_host, port=server_port)
