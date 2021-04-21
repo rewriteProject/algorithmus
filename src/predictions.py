@@ -71,7 +71,7 @@ class predictions:
         # create_date of current container (status=OPEN) from certain country
         # REST GET Requst as JSON
         url_2 = str(chirs_address) + str(chris_port) + '/analytics/forecast/p1-2/{}'.format(country)
-        request_2 = requests.post(url)
+        request_2 = requests.post(url_2)
 
         #with open('../resources/p1_db_anfrage_2.json', 'r') as f:
             #request_2 = f.read()
