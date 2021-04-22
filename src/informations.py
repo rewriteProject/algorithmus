@@ -28,10 +28,10 @@ class informations:
         # data request for country, container_id, create_date with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/all'
-            request_json = requests.post(url)
+            url = 'http://' + str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/all'
+            request = requests.post(url)
         else:
-            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/{}'.format(country)
+            url = 'http://' + str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/{}'.format(country)
             print(url)
             request = requests.post(url)
 
@@ -92,10 +92,10 @@ class informations:
         # data request for country, container_id, curr_weight_kg, max_weight_kg with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i2/all'
+            url = 'http://' + str(chris_address) + ':' + str(chris_port) + '/analytics/information/i2/all'
             request = requests.post(url)
         else:
-            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i2/{}'.format(country)
+            url = 'http://' + str(chris_address) + ':' + str(chris_port) + '/analytics/information/i2/{}'.format(country)
             print(url)
             request = requests.post(url)
 
