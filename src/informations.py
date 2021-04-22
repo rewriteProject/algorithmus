@@ -28,10 +28,10 @@ class informations:
         # data request for country, container_id, create_date with status = OPEN
         # REST GET Request as JSON
         if country == '':
-            url = str(chris_address) + str(chris_port) + '/analytics/information/i1/all'
+            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/all'
             request_json = requests.post(url)
         else:
-            url = str(chris_address) + str(chris_port) + '/analytics/information/i1/{}'.format(country)
+            url = str(chris_address) + ':' + str(chris_port) + '/analytics/information/i1/{}'.format(country)
             print(url)
             request = requests.post(url)
 

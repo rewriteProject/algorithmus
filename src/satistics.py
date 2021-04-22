@@ -27,11 +27,11 @@ class statistics:
         # data request for types in country and timespan + container CLOSED
         # REST GET
         if type == '':
-            url = str(chris_address) + str(chris_port) + '/analytics/statistics/{}/all'.format(country)
+            url = str(chris_address) + ':' + str(chris_port) + '/analytics/statistics/{}/all'.format(country)
             params = {'minDate': min, 'maxDate': max}
             request = requests.post(url, params)
         else:
-            url = str(chris_address) + str(chris_port) + '/analytics/statistics/{}/{}'.format(country, type)
+            url = str(chris_address) + ':' + str(chris_port) + '/analytics/statistics/{}/{}'.format(country, type)
             print(url)
             params = {'minDate': min, 'maxDate': max}
             request = requests.post(url, params)
